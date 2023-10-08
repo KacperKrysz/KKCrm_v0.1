@@ -48,7 +48,7 @@
 <body>
 <div class="login-container">
     <h2>Logowanie</h2>
-    <form action="/userLogin" method="POST">
+    <form action="/home" method="POST">
         <label for="login">Login:</label>
         <input type="text" id="login" name="login" required><br>
 

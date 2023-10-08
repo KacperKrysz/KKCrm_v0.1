@@ -2,6 +2,7 @@ package app.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -14,19 +15,24 @@ public class UserController {
         this.userDao = userDao;
     }
 
-    @PostMapping("/userLogin")
-    @ResponseBody
-    public String homePage(@RequestParam String login, @RequestParam String password) {
+    @RequestMapping("/home")
+    public String homePage() {
+        return "homeView";
+    }
+
+
+    @PostMapping("/home")
+    public String homePageLogin(@RequestParam String login, @RequestParam String password) {
 
         if (userDao.findByLogin(login) != null) {
             if (userDao.findByLogin(login).getPassword().equals(password)){
                 return "homeView";
             } else {
-                return "Nieprawidłowe dane logowania";
+                return "index";
             }
 
         } else {
-            return "Nieprawidłowe dane logowania";
+            return "index";
         }
 
     }

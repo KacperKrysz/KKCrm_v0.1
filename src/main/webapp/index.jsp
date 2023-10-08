@@ -48,12 +48,12 @@
 <body>
 <div class="login-container">
     <h2>Logowanie</h2>
-    <form action="proces_logowania.php" method="POST">
+    <form action="/userLogin" method="POST">
         <label for="login">Login:</label>
         <input type="text" id="login" name="login" required><br>
 
-        <label for="haslo">Hasło:</label>
-        <input type="password" id="haslo" name="haslo" required><br>
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" name="password" required><br>
 
         <input type="submit" value="Zaloguj się">
     </form>

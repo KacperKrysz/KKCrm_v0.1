@@ -16,6 +16,10 @@
             <property name="hibernate.dialect"
                       value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.connection.characterEncoding" value="utf8" />
+
+                <property name="javax.persistence.schema-generation.database.action" value="create"/>
+                <property name="javax.persistence.sql-load-script-source" value="C:\Users\kacpe\OneDrive\Pulpit\KKCrm v0.1\src\main\resources\META-INF\init_data.sql"/>
+
         </properties>
     </persistence-unit>
 </persistence>

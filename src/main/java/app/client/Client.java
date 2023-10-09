@@ -93,6 +93,33 @@ public class Client {
         modificationDate = LocalDateTime.now();
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
-
+    public void setProperties(String fullName, String shortName, String type, String industry,
+                  String address, String nip, String source, String contactPerson,
+                  String trainingPatron, String softwarePatron, String additionalInfo,
+                  int haspqfmea, LocalDateTime pqfmeaUpdateDate, int haspqfmeaPlus,
+                  LocalDateTime pqfmeaPlusUpdateDate, int haspqmsa, LocalDateTime pqmsaUpdateDate,
+                  int needManualUpdate) {
+        this.fullName = fullName;
+        this.shortName = shortName;
+        this.type = type;
+        this.industry = industry;
+        this.address = address;
+        this.nip = nip;
+        this.source = source;
+        this.contactPerson = contactPerson;
+        this.trainingPatron = trainingPatron;
+        this.softwarePatron = softwarePatron;
+        this.additionalInfo = additionalInfo;
+        this.haspqfmea = haspqfmea;
+        this.pqfmeaUpdateDate = pqfmeaUpdateDate;
+        this.haspqfmeaPlus = haspqfmeaPlus;
+        this.pqfmeaPlusUpdateDate = pqfmeaPlusUpdateDate;
+        this.haspqmsa = haspqmsa;
+        this.pqmsaUpdateDate = pqmsaUpdateDate;
+        this.needManualUpdate = needManualUpdate;
+    }
 }

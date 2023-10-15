@@ -4,7 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -28,11 +27,11 @@ public class UserController {
             if (userDao.findByLogin(login).getPassword().equals(password)){
                 return "homeView";
             } else {
-                return "index";
+                return "/WEB-INF/index.jsp";
             }
 
         } else {
-            return "index";
+            return "/WEB-INF/index.jsp";
         }
 
     }

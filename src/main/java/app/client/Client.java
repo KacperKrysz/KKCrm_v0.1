@@ -1,24 +1,30 @@
 package app.client;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Scope(value = WebApplicationContext.SCOPE_SESSION,proxyMode = ScopedProxyMode.TARGET_CLASS)
 @Table(name = "clients")
 public class Client {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "fullName", length = 100)
+    @Column(length = 100)
     private String fullName;
 
     @Column(name = "shortName", length = 100)
@@ -54,28 +60,28 @@ public class Client {
 
     @Range(min = 0,max = 1)
     @Column(name = "haspqfmea")
-    private int haspqfmea;
+    private Integer haspqfmea;
 
     @Column(name = "pqfmeaUpdateDate")
-    private LocalDateTime pqfmeaUpdateDate;
+    private LocalDate pqfmeaUpdateDate;
 
     @Range(min = 0,max = 1)
     @Column(name = "haspqfmeaPlus")
-    private int haspqfmeaPlus;
+    private Integer haspqfmeaPlus;
 
     @Column(name = "pqfmeaPlusUpdateDate")
-    private LocalDateTime pqfmeaPlusUpdateDate;
+    private LocalDate pqfmeaPlusUpdateDate;
 
     @Range(min = 0,max = 1)
     @Column(name = "haspqmsa")
-    private int haspqmsa;
+    private Integer haspqmsa;
 
     @Column(name = "pqmsaUpdateDate")
-    private LocalDateTime pqmsaUpdateDate;
+    private LocalDate pqmsaUpdateDate;
 
     @Range(min = 0,max = 1)
     @Column(name = "needManualUpdate")
-    private int needManualUpdate;
+    private Integer needManualUpdate;
 
     @Column(name = "creationDate")
     private LocalDateTime creationDate;
@@ -93,33 +99,5 @@ public class Client {
         modificationDate = LocalDateTime.now();
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
 
-    public void setProperties(String fullName, String shortName, String type, String industry,
-                  String address, String nip, String source, String contactPerson,
-                  String trainingPatron, String softwarePatron, String additionalInfo,
-                  int haspqfmea, LocalDateTime pqfmeaUpdateDate, int haspqfmeaPlus,
-                  LocalDateTime pqfmeaPlusUpdateDate, int haspqmsa, LocalDateTime pqmsaUpdateDate,
-                  int needManualUpdate) {
-        this.fullName = fullName;
-        this.shortName = shortName;
-        this.type = type;
-        this.industry = industry;
-        this.address = address;
-        this.nip = nip;
-        this.source = source;
-        this.contactPerson = contactPerson;
-        this.trainingPatron = trainingPatron;
-        this.softwarePatron = softwarePatron;
-        this.additionalInfo = additionalInfo;
-        this.haspqfmea = haspqfmea;
-        this.pqfmeaUpdateDate = pqfmeaUpdateDate;
-        this.haspqfmeaPlus = haspqfmeaPlus;
-        this.pqfmeaPlusUpdateDate = pqfmeaPlusUpdateDate;
-        this.haspqmsa = haspqmsa;
-        this.pqmsaUpdateDate = pqmsaUpdateDate;
-        this.needManualUpdate = needManualUpdate;
-    }
 }

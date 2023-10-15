@@ -47,26 +47,10 @@
   <label for="additionalInfo">Dodatkowe informacje:</label>
   <input type="text" id="additionalInfo" name="additionalInfo" maxlength="100"><br>
 
-  <label for="haspqfmea">Czy ma PQFMEA:</label>
-  <input type="number" id="haspqfmea" name="haspqfmea" min="0" max="1"><br>
-
-  <label for="pqfmeaUpdateDate">Data aktualizacji PQFMEA:</label>
-  <input type="datetime-local" id="pqfmeaUpdateDate" name="pqfmeaUpdateDate">
-
-  <label for="haspqfmeaPlus">Czy ma PQFMEA Plus:</label>
-  <input type="number" id="haspqfmeaPlus" name="haspqfmeaPlus" min="0" max="1"><br>
-
-  <label for="pqfmeaPlusUpdateDate">Data aktualizacji PQFMEA Plus:</label>
-  <input type="datetime-local" id="pqfmeaPlusUpdateDate" name="pqfmeaPlusUpdateDate"><br>>
-
-  <label for="haspqmsa">Czy ma PQMSA:</label>
-  <input type="number" id="haspqmsa" name="haspqmsa" min="0" max="1"><br>
-
-  <label for="pqmsaUpdateDate">Data aktualizacji PQMSA:</label>
-  <input type="datetime-local" id="pqmsaUpdateDate" name="pqmsaUpdateDate"><br>
-
   <label for="needManualUpdate">Czy potrzebuje ręcznej aktualizacji:</label>
-  <input type="number" id="needManualUpdate" name="needManualUpdate" min="0" max="1"><br>
+  <input type="checkbox" id="needManualUpdate" name="needManualUpdate" value="1"><br>
+  <input type="hidden" name="needManualUpdate" value="0"><br>
+
 
   <input type="submit" value="Dodaj klienta">
 </form>

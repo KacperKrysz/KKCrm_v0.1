@@ -7,13 +7,22 @@
   <meta charset="UTF-8">
   <title>Lista Klientów</title>
 </head>
+
+<script type="text/javascript">
+  function confirmAndRedirect() {
+    var answer = confirm("Czy na pewno chcesz usunąć klienta?");
+    if (answer) {
+      window.location.href = "/clients/delete/${client.id}"; // Przekierowanie do innej strony
+    }
+  }
+</script>
+
 <body>
 <%@include file="header.jsp"%>
 
 <h2>Informacje o kliencie</h2>
-<!-- link do formularza edycji klienta -->
-<a href="x">
-  <button>Edytuj</button>
+<a href="/clients/edit/${client.id}">
+  <button>Edytu2j</button>
 </a>
 
 <p>ID: ${client.id}</p>
@@ -60,7 +69,8 @@
 <p>${client.additionalInfo}</p>
 <p>Data utworzenia: ${client.creationDate}</p>
 <p>Data modyfikacji: ${client.modificationDate}</p>
-<a href="x">
+
+<a href="javascript:void(0);" onclick="confirmAndRedirect();">
   <button>Usuń</button>
 </a>
 </body>

@@ -4,7 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/clients")
@@ -32,13 +34,51 @@ public class ClientController {
         return "addClientForm";
     }
 
+    @GetMapping("/edit/{clientId}")
+    public String editClientShow(@PathVariable Long clientId, Model model){
+        model.addAttribute("client",clientDao.findById(clientId));
+        return "editClientForm";
+    }
+
+    @PostMapping("/edit/{clientId}")
+    public String editClientPerform(
+            @RequestParam String fullName, @RequestParam String shortName, @RequestParam String type,
+            @RequestParam String industry, @RequestParam String address, @RequestParam String nip,
+            @RequestParam String source, @RequestParam String contactPerson, @RequestParam String trainingPatron,
+            @RequestParam String softwarePatron, @RequestParam String additionalInfo, @RequestParam Integer needManualUpdate,
+            @PathVariable Long clientId, Model model) {
+
+        if (needManualUpdate == null) {
+            needManualUpdate = 0;
+        }
+        Client client = clientDao.findById(clientId);
+
+        client.setFullName(fullName);
+        client.setShortName(shortName);
+        client.setType(type);
+        client.setIndustry(industry);
+        client.setAddress(address);
+        client.setNip(nip);
+        client.setSource(source);
+        client.setContactPerson(contactPerson);
+        client.setTrainingPatron(trainingPatron);
+        client.setSoftwarePatron(softwarePatron);
+        client.setAdditionalInfo(additionalInfo);
+        client.setNeedManualUpdate(needManualUpdate);
+
+
+        clientDao.update(client);
+        model.addAttribute("client", client);
+        return "singleClientView";
+    }
+
+
     @PostMapping("/addClient")
     public String addClientPerform(
             @RequestParam String fullName, @RequestParam String shortName, @RequestParam String type,
             @RequestParam String industry, @RequestParam String address, @RequestParam String nip,
             @RequestParam String source, @RequestParam String contactPerson, @RequestParam String trainingPatron,
-            @RequestParam String softwarePatron, @RequestParam String additionalInfo, @RequestParam int haspqfmea, @RequestParam int haspqfmeaPlus,
-            @RequestParam int haspqmsa, @RequestParam int needManualUpdate,
+            @RequestParam String softwarePatron, @RequestParam String additionalInfo, @RequestParam Integer needManualUpdate,
             Model model) {
 
         Client existingClient = clientDao.findClientByFullName(fullName);
@@ -59,9 +99,6 @@ public class ClientController {
         client.setTrainingPatron(trainingPatron);
         client.setSoftwarePatron(softwarePatron);
         client.setAdditionalInfo(additionalInfo);
-        client.setHaspqfmea(haspqfmea);
-        client.setHaspqfmeaPlus(haspqfmeaPlus);;
-        client.setHaspqmsa(haspqmsa);
         client.setNeedManualUpdate(needManualUpdate);
 
         clientDao.saveClient(client);
@@ -69,6 +106,11 @@ public class ClientController {
         return "singleClientView";
     }
 
+    @RequestMapping("/delete/{clientId}")
+    public String deleteClient(@PathVariable Long clientId) {
+        clientDao.delete(clientDao.findById(clientId));
+        return "redirect:/clients/list";
+    }
 
 
 }

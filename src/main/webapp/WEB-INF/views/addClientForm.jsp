@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
+<%@include file="forms/header.jsp"%>
 
 <form method="post">
   <label for="fullName">Pełna nazwa:</label>

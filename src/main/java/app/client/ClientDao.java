@@ -1,5 +1,6 @@
 package app.client;
 
+import app.activity.Activity;
 import app.client.Client;
 import app.user.User;
 import org.springframework.stereotype.Repository;

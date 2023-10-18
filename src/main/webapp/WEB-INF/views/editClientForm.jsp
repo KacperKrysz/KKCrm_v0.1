@@ -13,7 +13,7 @@
     <title>Title</title>
 </head>
 <body>
-<%@include file="header.jsp"%>
+<%@include file="forms/header.jsp"%>
 
 <form method="post">
   <label for="fullName">Pełna nazwa:</label>
@@ -50,9 +50,8 @@
   <input type="text" id="additionalInfo" name="additionalInfo" maxlength="100" value="${client.additionalInfo}"><br>
 
   <label for="needManualUpdate">Czy potrzebuje ręcznej aktualizacji: </label>
-  <input type="hidden" name="needManualUpdate" value="0">
   <input type="checkbox" id="needManualUpdate" name="needManualUpdate" value="1" ${client.needManualUpdate == 1 ? 'checked' : ''}><br>
-
+  <input type="hidden" name="needManualUpdate" value="0">
 
 
   <input type="submit" value="Zapisz">

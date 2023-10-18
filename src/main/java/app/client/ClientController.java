@@ -1,20 +1,24 @@
 package app.client;
 
+import app.activity.Activity;
+import app.activity.ActivityDao;
+import app.user.UserDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Controller
 @RequestMapping("/clients")
 public class ClientController {
     private final ClientDao clientDao;
+    private final UserDao userDao;
 
-    public ClientController(ClientDao clientDao) {
+    private final ActivityDao activityDao;
+
+    public ClientController(ClientDao clientDao, UserDao userDao, ActivityDao activityDao) {
         this.clientDao = clientDao;
+        this.userDao = userDao;
+        this.activityDao = activityDao;
     }
 
     @RequestMapping("/list")
@@ -23,9 +27,11 @@ public class ClientController {
         return "allClientsView";
     }
 
-    @RequestMapping("/{fullName}")
-    public String clientInfo (@PathVariable String fullName,Model model) {
-        model.addAttribute("client",clientDao.findClientByFullName(fullName));
+    @RequestMapping("/{clientId}")
+    public String clientInfo (@PathVariable Long clientId,Model model) {
+
+        model.addAttribute("client", clientDao.findById(clientId));
+        model.addAttribute("activities", activityDao.findActivitiesByClientId(clientId));
         return "singleClientView";
     }
 
@@ -69,7 +75,7 @@ public class ClientController {
 
         clientDao.update(client);
         model.addAttribute("client", client);
-        return "singleClientView";
+        return "redirect:/clients/" + clientId;
     }
 
 
@@ -84,7 +90,7 @@ public class ClientController {
         Client existingClient = clientDao.findClientByFullName(fullName);
 
         if (existingClient != null) {
-            return "allClientsView";
+            return "redirect:/clients/list";
         }
 
         Client client = new Client();
@@ -103,12 +109,16 @@ public class ClientController {
 
         clientDao.saveClient(client);
         model.addAttribute("client", client);
-        return "singleClientView";
+        return "redirect:/clients/" + client.getId();
     }
 
     @RequestMapping("/delete/{clientId}")
     public String deleteClient(@PathVariable Long clientId) {
+        activityDao.findActivitiesByClientId(clientId).forEach(activity -> {
+            activityDao.delete(activity);
+        });
         clientDao.delete(clientDao.findById(clientId));
+
         return "redirect:/clients/list";
     }
 

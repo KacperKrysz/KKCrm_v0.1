@@ -1,8 +1,12 @@
 package app.client;
 
+import app.activity.Activity;
+import app.contact.Contact;
+import app.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -11,6 +15,8 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -24,10 +30,10 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(length = 100)
+    @Column(unique = true)
     private String fullName;
 
-    @Column(name = "shortName", length = 100)
+    @Column(unique = true)
     private String shortName;
 
     @Column(name = "type", length = 100)
@@ -51,8 +57,11 @@ public class Client {
     @Column(name = "trainingPatron", length = 100)
     private String trainingPatron;
 
-    @Column(name = "softwarePatron", length = 100)
+    @Column
     private String softwarePatron;
+
+//    @ManyToOne
+//    private User softwarePatron;
 
     @Column(name = "additionalInfo", length = 100)
     private String additionalInfo;
@@ -69,25 +78,35 @@ public class Client {
     @Column(name = "haspqfmeaPlus")
     private Integer haspqfmeaPlus;
 
-    @Column(name = "pqfmeaPlusUpdateDate")
+    @Column
     private LocalDate pqfmeaPlusUpdateDate;
 
     @Range(min = 0,max = 1)
-    @Column(name = "haspqmsa")
+    @Column
     private Integer haspqmsa;
 
-    @Column(name = "pqmsaUpdateDate")
+    @Column
     private LocalDate pqmsaUpdateDate;
 
     @Range(min = 0,max = 1)
-    @Column(name = "needManualUpdate")
+    @Column
     private Integer needManualUpdate;
 
-    @Column(name = "creationDate")
+    @Column
     private LocalDateTime creationDate;
 
     @Column(name = "modificationDate")
     private LocalDateTime modificationDate;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "client")
+    private List<Activity> activities = new ArrayList<>();
+
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "client")
+    private List<Contact> contacts = new ArrayList<>();
+
 
     @PrePersist
     public void prePersist() {

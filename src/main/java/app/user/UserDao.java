@@ -43,4 +43,16 @@ public class UserDao {
         }
     }
 
+    public User findByFullName(String fullName) {
+        try {
+            return entityManager.createQuery("SELECT DISTINCT a FROM User a WHERE a.fullName = :fullName", User.class)
+                    .setParameter("fullName", fullName)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+
+
 }

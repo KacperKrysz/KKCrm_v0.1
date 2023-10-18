@@ -6,23 +6,26 @@
 <head>
   <meta charset="UTF-8">
   <title>Lista Klientów</title>
-</head>
-
-<script type="text/javascript">
-  function confirmAndRedirect() {
-    var answer = confirm("Czy na pewno chcesz usunąć klienta?");
-    if (answer) {
-      window.location.href = "/clients/delete/${client.id}"; // Przekierowanie do innej strony
+  <script type="text/javascript">
+    function confirmAndRedirect() {
+      var answer = confirm("Czy na pewno chcesz usunąć klienta?");
+      if (answer) {
+        window.location.href = "/clients/delete/${client.id}"; // Przekierowanie do innej strony
+      }
     }
-  }
-</script>
 
+  </script>
+</head>
 <body>
-<%@include file="header.jsp"%>
+
+<%@include file="forms/header.jsp"%>
 
 <h2>Informacje o kliencie</h2>
 <a href="/clients/edit/${client.id}">
-  <button>Edytu2j</button>
+  <button>Edytuj</button>
+</a>
+<a href="javascript:void(0);" onclick="confirmAndRedirect();">
+  <button>Usuń</button>
 </a>
 
 <p>ID: ${client.id}</p>
@@ -70,8 +73,36 @@
 <p>Data utworzenia: ${client.creationDate}</p>
 <p>Data modyfikacji: ${client.modificationDate}</p>
 
-<a href="javascript:void(0);" onclick="confirmAndRedirect();">
-  <button>Usuń</button>
+
+  <h2>Aktywności</h2>
+  <a href="/activity/addActivity/${clientId}">
+    <button>Dodaj</button>
+  </a>
+  <table border="1">
+    <tr>
+      <th>Temat</th>
+      <th>Status</th>
+      <th>Osoba kontaktowa</th>
+      <th>Data kontaktu</th>
+      <th>Przydzielone do</th>
+      <th>Aktywność</th>
+    </tr>
+    <c:forEach var="activity" items="${activities}">
+      <tr>
+        <td><a href="/activity/${client.id}/${activity.id}">${activity.subject}</a></td>
+        <td>${activity.status}</td>
+        <td>${activity.contactPerson}</td>
+        <td>${activity.date}</td>
+        <td>${activity.softwarePatron}</td>
+        <td>
+          <a href="/activity/delete/${activity.id}" onclick="return confirm('Czy na pewno chcesz usunąć akcję?');">
+          <button>Usuń</button>
+        </a></td>
+      </tr>
+    </c:forEach>
+
+  </table>
+
 </a>
 </body>
 </html>

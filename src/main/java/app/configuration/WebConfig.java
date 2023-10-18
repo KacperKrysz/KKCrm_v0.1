@@ -8,11 +8,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
+import java.util.TimeZone;
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.jsp("/WEB-INF/views/", ".jsp");
+    }
+
+    @Bean
+    public void setTimeZone() {
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
     }
 
     @Bean(name = "localeResolver")

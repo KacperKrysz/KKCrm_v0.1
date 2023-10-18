@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<%@include file="header.jsp"%>
+<%@include file="forms/header.jsp"%>
 
 <h2>Lista Klientów</h2>
 <table border="1">
@@ -27,7 +27,7 @@
     </tr>
     <c:forEach var="client" items="${clients}">
         <tr>
-            <td><a href="/clients/${client.fullName}">${client.fullName}</a></td>
+            <td><a href="/clients/${client.id}">${client.fullName}</a></td>
             <td>${client.type}</td>
             <td>${client.address}</td>
             <td>${client.pqfmeaPlusUpdateDate}</td>

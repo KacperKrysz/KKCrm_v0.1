@@ -2,6 +2,7 @@ package app.client;
 
 import app.activity.Activity;
 import app.activity.ActivityDao;
+import app.contact.ContactDao;
 import app.user.UserDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +13,15 @@ import org.springframework.web.bind.annotation.*;
 public class ClientController {
     private final ClientDao clientDao;
     private final UserDao userDao;
-
     private final ActivityDao activityDao;
 
-    public ClientController(ClientDao clientDao, UserDao userDao, ActivityDao activityDao) {
+    private final ContactDao contactDao;
+
+    public ClientController(ClientDao clientDao, UserDao userDao, ActivityDao activityDao, ContactDao contactDao) {
         this.clientDao = clientDao;
         this.userDao = userDao;
         this.activityDao = activityDao;
+        this.contactDao = contactDao;
     }
 
     @RequestMapping("/list")
@@ -32,6 +35,7 @@ public class ClientController {
 
         model.addAttribute("client", clientDao.findById(clientId));
         model.addAttribute("activities", activityDao.findActivitiesByClientId(clientId));
+        model.addAttribute("contacts",contactDao.findContactsByClientId(clientId));
         return "singleClientView";
     }
 

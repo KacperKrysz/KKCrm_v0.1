@@ -85,7 +85,7 @@
       <th>Osoba kontaktowa</th>
       <th>Data kontaktu</th>
       <th>Przydzielone do</th>
-      <th>Aktywność</th>
+      <th>Działanie</th>
     </tr>
     <c:forEach var="activity" items="${activities}">
       <tr>
@@ -102,6 +102,39 @@
     </c:forEach>
 
   </table>
+
+
+
+<h2>Kontakty</h2>
+<a href="/contact/add/${clientId}">
+  <button>Dodaj</button>
+</a>
+<table border="1">
+  <tr>
+    <th>Imię i nazwisko</th>
+    <th>E-mail</th>
+    <th>Telefon komórkowy</th>
+    <th>Telefon stacjonarny</th>
+    <th>Stanowisko</th>
+    <th>Dział</th>
+    <th>Działanie</th>
+  </tr>
+  <c:forEach var="contact" items="${contacts}">
+    <tr>
+      <td><a href="/contact/${client.id}/${contact.id}">${contact.nameSurname}</a></td>
+      <td>${contact.email}</td>
+      <td>${contact.mobileNumber}</td>
+      <td>${contact.phoneNumber}</td>
+      <td>${contact.position}</td>
+      <td>${contact.department}</td>
+      <td>
+        <a href="/contact/delete/${contact.id}" onclick="return confirm('Czy na pewno chcesz usunąć kontakt?');">
+          <button>Usuń</button>
+        </a></td>
+    </tr>
+  </c:forEach>
+
+</table>
 
 </a>
 </body>

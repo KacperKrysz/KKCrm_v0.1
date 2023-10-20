@@ -77,7 +77,6 @@ public class ActivityController {
 
         Activity activity = activityDao.findById(activityId);
 
-        System.out.println(LocalDate.parse(date,formatter));
         activity.setSubject(subject);
         activity.setStatus(status);
         activity.setDate(LocalDate.parse(date,formatter));

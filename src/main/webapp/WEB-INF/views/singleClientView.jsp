@@ -136,6 +136,46 @@
 
 </table>
 
+
+
+<h2>Zakupione produkty</h2>
+<a href="/pproduct/add/${clientId}">
+  <button>Dodaj</button>
 </a>
+<table border="1">
+  <tr>
+    <th>Produkt/Usługa</th>
+    <th>Data zakupu</th>
+    <th>Data aktualizacji</th>
+    <th>Rodzaj licencji</th>
+    <th>Działanie</th>
+  </tr>
+  <c:forEach var="purchasedProduct" items="${purchasedProducts}">
+    <tr>
+      <td><a href="/pproduct/${client.id}/${purchasedProduct.id}">${purchasedProduct.productType}</a></td>
+      <td>${purchasedProduct.purchaseDate}</td>
+      <td>
+        <c:choose>
+          <c:when test="${purchasedProduct.productType eq 'PQ-FMEA' || purchasedProduct.productType eq 'PQ-FMEA+'}">
+            <c:out value="${purchasedProduct.pqfmeaUpdateDate}" />
+          </c:when>
+          <c:when test="${purchasedProduct.productType eq 'PQ-MSA+'}">
+            <c:out value="${purchasedProduct.pqmsaUpdateDate}" />
+          </c:when>
+          <c:otherwise>
+          </c:otherwise>
+        </c:choose>
+      </td>
+      <td>${purchasedProduct.licenseSeatNumber}</td>
+      <td>
+        <a href="/pproduct/delete/${purchasedProduct.id}" onclick="return confirm('Czy na pewno chcesz usunąć produkt?');">
+          <button>Usuń</button>
+        </a>
+      </td>
+    </tr>
+  </c:forEach>
+
+</table>
+
 </body>
 </html>

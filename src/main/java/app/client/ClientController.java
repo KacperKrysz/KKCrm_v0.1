@@ -3,6 +3,8 @@ package app.client;
 import app.activity.Activity;
 import app.activity.ActivityDao;
 import app.contact.ContactDao;
+import app.purchasedProducts.PurchasedProduct;
+import app.purchasedProducts.PurchasedProductDao;
 import app.user.UserDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +18,15 @@ public class ClientController {
     private final ActivityDao activityDao;
 
     private final ContactDao contactDao;
+    private final PurchasedProductDao purchasedProductDao;
 
-    public ClientController(ClientDao clientDao, UserDao userDao, ActivityDao activityDao, ContactDao contactDao) {
+    public ClientController(ClientDao clientDao, UserDao userDao, ActivityDao activityDao,
+                            ContactDao contactDao, PurchasedProductDao purchasedProductDao) {
         this.clientDao = clientDao;
         this.userDao = userDao;
         this.activityDao = activityDao;
         this.contactDao = contactDao;
+        this.purchasedProductDao = purchasedProductDao;
     }
 
     @RequestMapping("/list")
@@ -36,6 +41,7 @@ public class ClientController {
         model.addAttribute("client", clientDao.findById(clientId));
         model.addAttribute("activities", activityDao.findActivitiesByClientId(clientId));
         model.addAttribute("contacts",contactDao.findContactsByClientId(clientId));
+        model.addAttribute("purchasedProducts",purchasedProductDao.findPurchasedProductsByClientId(clientId));
         return "singleClientView";
     }
 

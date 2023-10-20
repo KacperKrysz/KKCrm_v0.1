@@ -2,6 +2,7 @@ package app.client;
 
 import app.activity.Activity;
 import app.contact.Contact;
+import app.purchasedProducts.PurchasedProduct;
 import app.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -106,6 +107,10 @@ public class Client {
     @ToString.Exclude
     @OneToMany(mappedBy = "client")
     private List<Contact> contacts = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "client")
+    private List<PurchasedProduct> purchasedProducts = new ArrayList<>();
 
 
     @PrePersist

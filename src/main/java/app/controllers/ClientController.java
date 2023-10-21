@@ -101,7 +101,7 @@ public class ClientController {
     public String addClientPerform(
             @RequestParam String fullName, @RequestParam String shortName, @RequestParam String type,
             @RequestParam String industry, @RequestParam String address, @RequestParam String nip,
-            @RequestParam String source, @RequestParam String contactPerson, @RequestParam String trainingPatron,
+            @RequestParam String source, @RequestParam String trainingPatron,
             @RequestParam String softwarePatron, @RequestParam String additionalInfo, @RequestParam Integer needManualUpdate,
             Model model) {
 
@@ -119,7 +119,6 @@ public class ClientController {
         client.setAddress(address);
         client.setNip(nip);
         client.setSource(source);
-        client.setContactPerson(contactPerson);
         client.setTrainingPatron(trainingPatron);
         client.setSoftwarePatron(softwarePatron);
         client.setAdditionalInfo(additionalInfo);
@@ -166,7 +165,7 @@ public class ClientController {
     public String editClientPerform(
             @RequestParam String fullName, @RequestParam String shortName, @RequestParam String type,
             @RequestParam String industry, @RequestParam String address, @RequestParam String nip,
-            @RequestParam String source, @RequestParam String contactPerson, @RequestParam String trainingPatron,
+            @RequestParam String source, @RequestParam String trainingPatron,
             @RequestParam String softwarePatron, @RequestParam String additionalInfo, @RequestParam Integer needManualUpdate,
             @PathVariable Long clientId, Model model) {
 
@@ -182,7 +181,6 @@ public class ClientController {
         client.setAddress(address);
         client.setNip(nip);
         client.setSource(source);
-        client.setContactPerson(contactPerson);
         client.setTrainingPatron(trainingPatron);
         client.setSoftwarePatron(softwarePatron);
         client.setAdditionalInfo(additionalInfo);

@@ -4,7 +4,7 @@
 <a href="/clients/list">
   <button>Klienci</button>
 </a>
-<a href="x">
+<a href="/contact/list">
   <button>Kontakty</button>
 </a>
 <a href="x">

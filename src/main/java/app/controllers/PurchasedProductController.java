@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.model.client.Client;
 import app.model.client.ClientDao;
 import app.model.purchasedProducts.PurchasedProduct;
 import app.model.purchasedProducts.PurchasedProductDao;
@@ -86,6 +87,7 @@ public class PurchasedProductController {
                                      @RequestParam String rabat, @RequestParam String priceWithRabat,
                                      @RequestParam String description, @RequestParam String softwarePatron, @PathVariable Long clientId){
 
+
         if (!purchaseDate.isEmpty()) {
             purchaseDateFormatted = LocalDate.parse(purchaseDate,formatter);
         }
@@ -96,6 +98,31 @@ public class PurchasedProductController {
 
         if (!pqmsaUpdateDate.isEmpty()) {
             pqmsaUpdateDateFormatted = LocalDate.parse(pqmsaUpdateDate,formatter);
+        }
+
+        if (productType.equals("PQ-FMEA+")) {
+            Client client = clientDao.findById(clientId);
+            client.setHaspqfmeaPlus(1);
+            client.setPqfmeaPlusUpdateDate(pqfmeaUpdateDateFormatted);
+            clientDao.update(client);
+        }
+
+
+        if (productType.equals("PQ-MSA+")) {
+            Client client = clientDao.findById(clientId);
+            client.setHaspqmsa(1);
+            client.setPqmsaUpdateDate(pqmsaUpdateDateFormatted);
+            clientDao.update(client);
+
+        }
+
+
+        if (productType.equals("PQ-FMEA")) {
+            Client client = clientDao.findById(clientId);
+            client.setHaspqfmea(1);
+            client.setPqfmeaUpdateDate(pqfmeaUpdateDateFormatted);
+            clientDao.update(client);
+
         }
 
         Integer rabatValue = (rabat.isEmpty()) ? null : Integer.valueOf(rabat);

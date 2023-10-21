@@ -1,5 +1,6 @@
 package app.controllers;
 
+import app.model.client.Client;
 import app.model.client.ClientDao;
 import app.model.contact.Contact;
 import app.model.contact.ContactDao;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,6 +23,16 @@ public class ContactController {
     private final ContactDao contactDao;
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+
+    private void ContactPersonToClient (int isContactPerson,Long clientId, String nameSurname, String email) {
+        if (isContactPerson == 1) {
+            Client client = clientDao.findById(clientId);
+            client.setContactPerson(String.format("%s - %s",nameSurname,email));
+            client.getContacts().forEach(contact -> contact.setIsContactPerson(0));
+            clientDao.update(client);
+        }
+    }
 
     /**
      * Initializes a new instance of the ContactController class with the provided dependencies.
@@ -78,6 +90,7 @@ public class ContactController {
      * @param clientId               The identifier of the associated client.
      * @return A redirect to the client's page after adding the contact.
      */
+    @Transactional
     @PostMapping("/add/{clientId}")
     public String addContactPerform(@RequestParam String nameSurname, @RequestParam String mobileNumber,
                                      @RequestParam String phoneNumber, @RequestParam String position,
@@ -87,6 +100,7 @@ public class ContactController {
                                      @RequestParam String rodoConsentDate, @RequestParam String softwarePatron,
                                      @PathVariable Long clientId){
 
+        ContactPersonToClient(isContactPerson,clientId,nameSurname,email);
 
         LocalDate marketingConsentDateFormatted = null;
         LocalDate rodoConsentDateFormatted = null;

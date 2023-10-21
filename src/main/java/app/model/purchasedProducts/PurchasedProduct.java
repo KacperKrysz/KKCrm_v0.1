@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
 /**
@@ -71,12 +72,15 @@ public class PurchasedProduct {
     private String licenseSeatNumber;
 
     @Column
+    @Min(value = 0, message = "Cena nie może być ujemna")
     private Double price;
 
     @Column
+    @Min(value = 0, message = "Rabat nie może być ujemny")
     private Integer rabat;
 
     @Column
+    @Min(value = 0, message = "Cena z rabatem nie może być ujemna")
     private Double priceWithRabat;
 
     @Column

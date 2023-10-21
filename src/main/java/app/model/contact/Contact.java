@@ -1,7 +1,6 @@
-package app.contact;
+package app.model.contact;
 
-import app.activity.Activity;
-import app.client.Client;
+import app.model.client.Client;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,9 +9,10 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+
+/**
+ * Represents a contact entity in the application.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,6 +20,23 @@ import java.util.List;
 @Table(name = "contacts")
 public class Contact {
 
+    /**
+     * Creates a new contact, ID is automatically generated.
+     *
+     * @param nameSurname         The name and surname of the contact person.
+     * @param mobileNumber        The mobile phone number of the contact person.
+     * @param phoneNumber         The phone number of the contact person.
+     * @param position            The position or role of the contact person.
+     * @param department          The department or division where the contact person works.
+     * @param email               The email address of the contact person.
+     * @param isContactPerson     Indicates whether the contact person is the main contact (1 for yes, 0 for no).
+     * @param marketingConsent    Indicates whether marketing consent is given (1 for yes, 0 for no).
+     * @param rodoConsent         Indicates whether GDPR consent is given (1 for yes, 0 for no).
+     * @param marketingConsentDate The date when marketing consent was given.
+     * @param rodoConsentDate      The date when GDPR consent was given.
+     * @param softwarePatron      The software patron or sponsor associated with the contact.
+     * @param client              The client associated with the contact.
+     */
     public Contact(String nameSurname, String mobileNumber, String phoneNumber, String position,
                    String department, String email, int isContactPerson, int marketingConsent,
                    int rodoConsent, LocalDate marketingConsentDate, LocalDate rodoConsentDate,

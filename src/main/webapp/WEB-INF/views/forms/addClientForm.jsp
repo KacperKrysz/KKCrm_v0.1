@@ -1,17 +1,12 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kacpe
-  Date: 09.10.2023
-  Time: 20:50
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<%@include file="forms/header.jsp"%>
+<%@include file="header.jsp"%>
 
 <form method="post">
   <label for="fullName">Pełna nazwa:</label>
@@ -54,6 +49,8 @@
 
   <input type="submit" value="Dodaj klienta">
 </form>
-
+<a href="/clients/list">
+  <button>Anuluj</button>
+</a>
 </body>
 </html>

@@ -1,7 +1,6 @@
-package app.user;
+package app.model.user;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;

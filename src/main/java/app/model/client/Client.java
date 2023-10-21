@@ -1,17 +1,13 @@
-package app.client;
+package app.model.client;
 
-import app.activity.Activity;
-import app.contact.Contact;
-import app.purchasedProducts.PurchasedProduct;
-import app.user.User;
+import app.model.activity.Activity;
+import app.model.contact.Contact;
+import app.model.purchasedProducts.PurchasedProduct;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.web.context.WebApplicationContext;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,6 +15,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Entity class representing a client in the application.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -113,11 +112,17 @@ public class Client {
     private List<PurchasedProduct> purchasedProducts = new ArrayList<>();
 
 
+    /**
+     * Initializes the creation date before persisting to the database.
+     */
     @PrePersist
     public void prePersist() {
         creationDate = LocalDateTime.now();
     }
 
+    /**
+     * Updates the modification date before updating the database.
+     */
     @PreUpdate
     public void preUpdate() {
         modificationDate = LocalDateTime.now();

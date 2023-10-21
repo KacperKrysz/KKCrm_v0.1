@@ -25,7 +25,9 @@
 
   <input type="submit" value="Zapisz zmiany">
 </form>
+<a href="/activity/${clientId}/${activityId}">
+  <button>Anuluj</button>
+</a>
 
-<a href="/clients/${clientId}">Powrót do listy aktywności</a>
 </body>
 </html>

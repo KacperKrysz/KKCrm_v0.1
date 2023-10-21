@@ -1,19 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kacpe
-  Date: 09.10.2023
-  Time: 20:50
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>Dodaj zakupiony produkt</title>
+  <title>Dodaj Produkt</title>
 </head>
 <body>
 <%@include file="header.jsp"%>
 
-<h1>Dodaj Produkt Zakupiony</h1>
+<h1>Dodaj Produkt</h1>
 <form method="post">
 
   <label for="productType">Typ produktu:</label>
@@ -72,6 +67,8 @@
 
   <input type="submit" value="Dodaj Produkt">
 </form>
-
+<a href="/clients/${clientId}">
+  <button>Anuluj</button>
+</a>
 </body>
 </html>

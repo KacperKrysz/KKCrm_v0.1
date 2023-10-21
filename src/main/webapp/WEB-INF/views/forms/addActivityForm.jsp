@@ -1,10 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: kacpe
-  Date: 09.10.2023
-  Time: 20:50
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -42,11 +37,15 @@
   <label for="contactPerson">Osoba kontaktowa:</label>
   <input type="text" id="contactPerson" name="contactPerson" ><br>
 
-  <label for="softwarePatron">Osoba kontaktowa:</label>
+  <label for="softwarePatron">Przydzielone do:</label>
   <input type="text" id="softwarePatron" name="softwarePatron" ><br>
 
   <input type="submit" value="Dodaj aktywność">
 </form>
+
+<a href="/clients/${clientId}">
+  <button>Anuluj</button>
+</a>
 
 </body>
 </html>
